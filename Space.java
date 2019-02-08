@@ -1,66 +1,70 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import greenfoot.*;
 
 /**
- * Space. The final frontier. 
+ * Space. Something for rockets to fly in.
  * 
  * @author Michael Kölling
  * @version 1.0
  */
 public class Space extends World
 {
+    private Counter scoreCounter;
+    private int startAsteroids = 5;
+
     /**
-     * Create space.
+     * Create the space and all objects within it.
      */
-    public Space()
-    {    
-        super(960, 620, 1);
-        
-        // Uncomment one of the following method calls if you want the objects created automatically:
-        
-        //sunAndPlanet();
-        //sunAndTwoPlanets();
-        //sunPlanetMoon();
-    }
-    
-    /**
-     * Set up the universe with a sun and a planet.
-     */
-    public void sunAndPlanet()
+    public Space() 
     {
-        removeAllObjects();
-        addObject (new Body (50, 240.0, new Vector(270, 0.03), new Color(255, 216, 0)), 460, 270);
-        addObject (new Body (20, 4.2, new Vector(90, 2.2), new Color(0, 124, 196)), 695, 260);
+        super(600, 500, 1);
+        GreenfootImage background = getBackground();
+        background.setColor(Color.BLACK);
+        background.fill();
+        drawStars(100);
+
+        Rocket rocket = new Rocket();
+        addObject(rocket, getWidth()/2 + 100, getHeight()/2);
+
+        addAsteroids(startAsteroids);
+
+        scoreCounter = new Counter("Score: ");
+        addObject(scoreCounter, 60, 480);
+
+        Explosion.initializeImages();
+        ProtonWave.initializeImages();
+    }
+
+    private void drawStars(int numStar) {
+        GreenfootImage background = getBackground();
+            background.setColor(Color.WHITE);
+            
+        for(int i = 0; i < numStar; i++){
+            int x = Greenfoot.getRandomNumber(getWidth()/2);
+            int y = Greenfoot.getRandomNumber(getHeight()/2);
+        }
+
     }
 
     /**
-     * Set up the universe with a sun and two planets.
+     * Add a given number of asteroids to our world. Asteroids are only added into
+     * the left half of the world.
      */
-    public void sunAndTwoPlanets()
+    private void addAsteroids(int count) 
     {
-        removeAllObjects();
-        addObject (new Body (50, 240.0, new Vector(270, 0.0), new Color(255, 216, 0)), 460, 310);
-        addObject (new Body (20, 4.2, new Vector(90, 2.2), new Color(0, 124, 196)), 695, 300);
-        addObject (new Body (24, 4.6, new Vector(270, 1.8), new Color(248, 160, 86)), 180, 290);
+        for(int i = 0; i < count; i++) 
+        {
+            int x = Greenfoot.getRandomNumber(getWidth()/2);
+            int y = Greenfoot.getRandomNumber(getHeight()/2);
+            addObject(new Asteroid(), x, y);
+        }
     }
 
     /**
-     * Set up the universe with a sun, a planet, and a moon.
+     * This method is called when the game is over to display the final score.
      */
-    public void sunPlanetMoon()
+    public void gameOver() 
     {
-        removeAllObjects();
-        addObject (new Body (50, 240.0, new Vector(270, 0.0), new Color(255, 216, 0)), 460, 270);
-        addObject (new Body (20, 4.2, new Vector(90, 2.2), new Color(0, 124, 196)), 720, 260);
-        addObject (new Body (5, 0.8, new Vector(90, 3.25), new Color(240, 220, 96)), 748, 260);
-    }
-
-    /**
-     * Remove all objects currently in the world.
-     */
-    private void removeAllObjects()
-    {
-        removeObjects (getObjects(Actor.class));
+        // TODO: show the score board here. Currently missing.
     }
 
 }

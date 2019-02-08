@@ -1,6 +1,6 @@
-Newton's Lab
-============
-Version 1
+        Asteroids
+        =========
+        Version 1
         
 This scenario is part of the book 
 
@@ -9,6 +9,6 @@ This scenario is part of the book
     by Michael Kölling
     ISBN: 0134054296
 
-This scenario is part Chapter 8. 
+This scenario is part of Chapter 9.
 
 Copyright (c) Michael Kölling.
